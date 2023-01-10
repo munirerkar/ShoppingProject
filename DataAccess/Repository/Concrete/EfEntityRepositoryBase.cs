@@ -15,7 +15,7 @@ namespace DataAccess.Repository.Concrete
         where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
-        public void Add(TEntity entity)
+        public async Task Add(TEntity entity)
         {
             //IDispossable pattern implementation of c#
             using (TContext context = new TContext())
@@ -26,7 +26,7 @@ namespace DataAccess.Repository.Concrete
             }
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             using (TContext context = new TContext())
             {
@@ -44,7 +44,7 @@ namespace DataAccess.Repository.Concrete
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())
             {
@@ -54,7 +54,7 @@ namespace DataAccess.Repository.Concrete
             }
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             using (TContext context = new TContext())
             {

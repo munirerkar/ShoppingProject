@@ -15,5 +15,6 @@ namespace DataAccess.Concrete.EntityFramework
             optionsBuilder.UseSqlServer(@"Server=RUBUSOFT-WEB\SQLEXPRESS; Database=ShoppingDB; uid = ozgur; pwd = 123456; TrustServerCertificate=True;");
         }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
     }
 }

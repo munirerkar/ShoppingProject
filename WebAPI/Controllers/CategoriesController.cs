@@ -6,23 +6,41 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoriesController : Controller
+    public class BrandController : Controller
     {
-        ICategoryService _categoryService;
-        public CategoriesController(ICategoryService categoryService)
+        IBrandService _brandService;
+        public BrandController(IBrandService brandService)
         {
-            _categoryService = categoryService;
+            _brandService = brandService;
         }
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IActionResult GetAllCategoriesNonDeleted()
         {
-            var result = _categoryService.GetAllCategoriesNonDeleted();
+            var result = _brandService.GetAllBrandNonDeleted();
             return Ok(result);
         }
-        [HttpPost]
-        public IActionResult CreateCategory(Category category)
+        [HttpGet("GetAllDeleted")]
+        public IActionResult GetAllCategoriesDeleted()
         {
-            _categoryService.CreateCategory(category);
+            var result = _brandService.GetAllBrandDeleted();
+            return Ok(result);
+        }
+        [HttpPost("Add")]
+        public IActionResult CreateCategory(Brand brand)
+        {
+            _brandService.CreateBrand(brand);
+            return Ok();
+        }
+        [HttpPost("Update")]
+        public IActionResult UpdateCategory(Brand brand)
+        {
+            _brandService.UpdateBrand(brand);
+            return Ok();
+        }
+        [HttpPost("Delete")]
+        public IActionResult DeleteCategory(Brand brand)
+        {
+            _brandService.DeleteBrand(brand);
             return Ok();
         }
     }

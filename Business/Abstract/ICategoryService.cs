@@ -9,9 +9,10 @@ namespace Business.Abstract
 {
     public interface ICategoryService
     {
-        List<Category> GetAllCategoriesNonDeleted();
-        void CreateCategory(Category category);
-        void UpdateCategory(Category category);
-        void DeleteCategory(Category category);
+        Task<List<Category>> GetAllCategoriesNonDeleted();
+        Task<List<Category>> GetAllCategoriesDeleted();
+        Task CreateCategory(Category category);
+        Task UpdateCategory(Category category);
+        Task DeleteCategory(Category category);
     }
 }

@@ -18,24 +18,29 @@ namespace Business.Concrete
         {
             _categoryDal = categoryDal;
         }
-        public void CreateCategory(Category category)
+        public async Task CreateCategory(Category category)
         {
-            _categoryDal.Add(category);
+             await _categoryDal.Add(category);
         }
 
-        public List<Category> GetAllCategoriesNonDeleted()
+        public async Task<List<Category>> GetAllCategoriesNonDeleted()
         {
-            return _categoryDal.GetAll(x => !x.IsDeleted);
+            return await _categoryDal.GetAll(x => !x.IsDeleted);
         }
 
-        public void DeleteCategory(Category category)
+        public async Task DeleteCategory(Category category)
         {
-            _categoryDal.Delete(category);
+            await _categoryDal.Delete(category);
         }
 
-        public void UpdateCategory(Category category)
+        public async Task UpdateCategory(Category category)
         {
-            _categoryDal.Update(category);
+            await _categoryDal.Update(category);
+        }
+
+        public async Task<List<Category>> GetAllCategoriesDeleted()
+        {
+            return await _categoryDal.GetAll(x => x.IsDeleted);
         }
     }
 }

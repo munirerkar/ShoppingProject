@@ -1,6 +1,6 @@
 using Business.Abstract;
 using Business.Concrete;
-using DataAccess.Abstract;
+using Business.Extensions;
 using DataAccess.Concrete.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,8 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSingleton<ICategoryService, CategoryManager>();
-builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
+builder.Services.LoadServiceLayerExtension();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
