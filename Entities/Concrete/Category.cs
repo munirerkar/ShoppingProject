@@ -10,6 +10,7 @@ namespace Entities.Concrete
     public class Category:IEntity
     {
         public int CategoryId { get; set; }
+        public int ParentId { get; set; }
         public string CategoryName { get; set; }
         public bool IsDeleted { get; set; } = false;
     }

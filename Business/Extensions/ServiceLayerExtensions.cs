@@ -17,6 +17,13 @@ namespace Business.Extensions
         {
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
+
+            services.AddScoped<IBrandService, BrandManager>();
+            services.AddScoped<IBrandDal, EfBrandDal>();
+
+            services.AddScoped<IProductService, ProductManager>();
+            services.AddScoped<IProductDal, EfProductDal>();
+
             return services;
         }
     }
