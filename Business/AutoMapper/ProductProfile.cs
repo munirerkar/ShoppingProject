@@ -14,6 +14,9 @@ namespace Business.AutoMapper
         public ProductProfile()
         {
             CreateMap<ProductAddDto, Product>().ReverseMap();
+            CreateMap<ProductUpdateDto, Product>().ReverseMap();
+            CreateMap<ProductDeleteDto, Product>().ReverseMap();
+            CreateMap<ProductDto, Product>().ReverseMap();
         }
     }
 }

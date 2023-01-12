@@ -35,15 +35,15 @@ namespace WebAPI.Controllers
             return Ok();
         }
         [HttpPost("Update")]
-        public IActionResult UpdateCategory(Product product)
+        public IActionResult UpdateCategory(ProductUpdateDto productUpdateDto)
         {
-            _productService.UpdateProduct(product);
+            _productService.UpdateProduct(productUpdateDto);
             return Ok();
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteCategory(Product product)
+        public IActionResult DeleteCategory(ProductDeleteDto productDeleteDto)
         {
-            _productService.DeleteProduct(product);
+            _productService.DeleteProduct(productDeleteDto);
             return Ok();
         }
     }

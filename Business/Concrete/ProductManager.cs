@@ -28,25 +28,28 @@ namespace Business.Concrete
             await _productDal.Add(map);
         }
 
-        public async Task DeleteProduct(Product product)
+        public async Task DeleteProduct(ProductDeleteDto productDeleteDto)
         {
-            await _productDal.Delete(product);
-
+            var map = _mapper.Map<Product>(productDeleteDto);
+            await _productDal.Delete(map);
         }
 
-        public async Task<List<Product>> GetAllProductsDeleted()
+        public async Task<List<ProductDto>> GetAllProductsDeleted()
         {
-            return await _productDal.GetAll(x=> x.IsDeleted);
+            var products = await _productDal.GetAll(x=> x.IsDeleted);
+            return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public async Task<List<Product>> GetAllProductsNonDeleted()
+        public async Task<List<ProductDto>> GetAllProductsNonDeleted()
         {
-            return await _productDal.GetAll(x => !x.IsDeleted);
+            var products = await _productDal.GetAll(x => !x.IsDeleted);
+            return _mapper.Map<List<ProductDto>>(products);
         }
 
-        public async Task UpdateProduct(Product product)
+        public async Task UpdateProduct(ProductUpdateDto productUpdateDto)
         {
-            await _productDal.Update(product);
+            var map = _mapper.Map<Product>(productUpdateDto);
+            await _productDal.Update(map);
         }
     }
 }
