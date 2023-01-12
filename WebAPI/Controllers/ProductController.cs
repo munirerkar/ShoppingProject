@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +29,9 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCategory(Product product)
+        public IActionResult CreateCategory(ProductAddDto productAddDto)
         {
-            _productService.CreateProduct(product);
+            _productService.CreateProduct(productAddDto);
             return Ok();
         }
         [HttpPost("Update")]

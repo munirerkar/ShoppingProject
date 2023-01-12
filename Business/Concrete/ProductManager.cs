@@ -1,4 +1,5 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -13,15 +14,18 @@ namespace Business.Concrete
     public class ProductManager : IProductService
     {
         IProductDal _productDal;
+        IMapper _mapper;
 
-        public ProductManager(IProductDal productDal)
+        public ProductManager(IProductDal productDal,IMapper mapper)
         {
             _productDal = productDal;
+            _mapper = mapper;
         }
 
         public async Task CreateProduct(ProductAddDto productAddDto)
         {
-            await _productDal.Add(productAddDto);
+            var map = _mapper.Map<Product>(productAddDto);
+            await _productDal.Add(map);
         }
 
         public async Task DeleteProduct(Product product)

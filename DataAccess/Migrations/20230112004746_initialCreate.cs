@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace DataAccess.Migrations
 {
     /// <inheritdoc />
@@ -67,6 +69,41 @@ namespace DataAccess.Migrations
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Brands",
+                columns: new[] { "BrandId", "BrandName", "IsDeleted" },
+                values: new object[,]
+                {
+                    { 1, "Asus", false },
+                    { 2, "Gigabyte", false },
+                    { 3, "MSI", false },
+                    { 4, "Casper", false },
+                    { 5, "Monster", false }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName", "IsDeleted", "ParentId" },
+                values: new object[,]
+                {
+                    { 1, "Bilgisayar", false, 0 },
+                    { 2, "Televizyon", false, 0 },
+                    { 3, "Moda", false, 0 },
+                    { 4, "Notebook", false, 1 },
+                    { 5, "Uydu", false, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "BarcodeNumber", "BrandId", "CategoryId", "IsDeleted", "ProductDescription", "ProductName" },
+                values: new object[,]
+                {
+                    { 1, "888888888888", 1, 4, false, "Asus oyuncular için mükemmel bir laptop tasarladı", "Asus Oyuncu Laptop" },
+                    { 2, "89999999999", 2, 4, false, "Gigabyte oyuncular için mükemmel bir laptop tasarladı", "Gigabyte Oyuncu Laptop" },
+                    { 3, "86999999999", 3, 4, false, "MSI oyuncular için mükemmel bir laptop tasarladı", "MSI Oyuncu Laptop" },
+                    { 4, "87999999999", 4, 4, false, "Casper oyuncular için mükemmel bir laptop tasarladı", "Casper Oyuncu Laptop" }
                 });
 
             migrationBuilder.CreateIndex(

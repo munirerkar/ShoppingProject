@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace Business.Extensions
     {
         public static IServiceCollection LoadServiceLayerExtension(this IServiceCollection services)
         {
+            var assembly = Assembly.GetExecutingAssembly();
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<ICategoryDal, EfCategoryDal>();
 
@@ -24,6 +26,7 @@ namespace Business.Extensions
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IProductDal, EfProductDal>();
 
+            services.AddAutoMapper(assembly);
             return services;
         }
     }
