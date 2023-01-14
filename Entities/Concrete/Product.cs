@@ -17,6 +17,8 @@ namespace Entities.Concrete
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string BarcodeNumber { get; set; }
+        public int UnitOfStock { get; set; }
+        public decimal UnitPrice { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }

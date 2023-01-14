@@ -1,5 +1,8 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Business.Abstract;
 using Business.Concrete;
+using Business.DependencyResolvers.Autofac;
 using Business.Extensions;
 using DataAccess.Concrete.EntityFramework;
 
@@ -12,7 +15,11 @@ builder.Services.AddControllers();
 builder.Services.LoadServiceLayerExtension();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(options =>
+{
+    options.RegisterModule(new AutofacBusinessModule());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

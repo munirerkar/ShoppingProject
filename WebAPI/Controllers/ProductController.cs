@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -20,31 +21,62 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductsNonDeleted()
         {
             var result = _productService.GetAllProductsNonDeleted();
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+            
         }
         [HttpGet("GetAllDeleted")]
-        public IActionResult GetAllCategoriesDeleted()
+        public IActionResult GetAllProductsDeleted()
         {
             var result = _productService.GetAllProductsDeleted();
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCategory(ProductAddDto productAddDto)
+        public IActionResult CreateProduct(ProductAddDto productAddDto)
         {
-            _productService.CreateProduct(productAddDto);
-            return Ok();
+            var result = _productService.CreateProduct(productAddDto);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
         [HttpPost("Update")]
-        public IActionResult UpdateCategory(ProductUpdateDto productUpdateDto)
+        public IActionResult UpdateProduct(ProductUpdateDto productUpdateDto)
         {
-            _productService.UpdateProduct(productUpdateDto);
-            return Ok();
+            var result = _productService.UpdateProduct(productUpdateDto);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteCategory(ProductDeleteDto productDeleteDto)
+        public IActionResult DeleteProduct(ProductDeleteDto productDeleteDto)
         {
-            _productService.DeleteProduct(productDeleteDto);
-            return Ok();
+            var result = _productService.DeleteProduct(productDeleteDto);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+        [HttpPost("SafeDelete")]
+        public IActionResult SafeDeleteProduct(int productId)
+        {
+            var result = _productService.SafeDeleteProduct(productId);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
     }
 }

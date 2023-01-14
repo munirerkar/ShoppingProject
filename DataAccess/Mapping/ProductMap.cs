@@ -21,6 +21,8 @@ namespace DataAccess.Mapping
                 ProductName = "Asus Oyuncu Laptop",
                 ProductDescription = "Asus oyuncular için mükemmel bir laptop tasarladı",
                 BarcodeNumber = "888888888888",
+                UnitOfStock = 23,
+                UnitPrice = 19999.99m,
             },
             new Product
             {
@@ -30,6 +32,8 @@ namespace DataAccess.Mapping
                 ProductName = "Gigabyte Oyuncu Laptop",
                 ProductDescription = "Gigabyte oyuncular için mükemmel bir laptop tasarladı",
                 BarcodeNumber = "89999999999",
+                UnitOfStock = 5,
+                UnitPrice = 24999.99m,
             },
             new Product
             {
@@ -39,6 +43,9 @@ namespace DataAccess.Mapping
                 ProductName = "MSI Oyuncu Laptop",
                 ProductDescription = "MSI oyuncular için mükemmel bir laptop tasarladı",
                 BarcodeNumber = "86999999999",
+                UnitOfStock = 15,
+                UnitPrice = 20999.99m,
+
             },
             new Product
             {
@@ -47,7 +54,9 @@ namespace DataAccess.Mapping
                 BrandId = 4,
                 ProductName = "Casper Oyuncu Laptop",
                 ProductDescription = "Casper oyuncular için mükemmel bir laptop tasarladı",
-                BarcodeNumber = "87999999999"
+                BarcodeNumber = "87999999999",
+                UnitOfStock = 30,
+                UnitPrice = 17999.99m,
             });
         }
     }
