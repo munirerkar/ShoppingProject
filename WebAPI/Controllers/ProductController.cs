@@ -21,18 +21,18 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductsNonDeleted()
         {
             var result = _productService.GetAllProductsNonDeleted();
-            if (result.Success)
+            if (result.IsCompleted)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-            
+
         }
         [HttpGet("GetAllDeleted")]
         public IActionResult GetAllProductsDeleted()
         {
             var result = _productService.GetAllProductsDeleted();
-            if (result.Success)
+            if (result.IsCompleted)
             {
                 return Ok(result);
             }
@@ -44,9 +44,9 @@ namespace WebAPI.Controllers
             var result = _productService.CreateProduct(productAddDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
         [HttpPost("Update")]
         public IActionResult UpdateProduct(ProductUpdateDto productUpdateDto)
@@ -54,9 +54,9 @@ namespace WebAPI.Controllers
             var result = _productService.UpdateProduct(productUpdateDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
         [HttpDelete("Delete")]
         public IActionResult DeleteProduct(ProductDeleteDto productDeleteDto)
@@ -64,9 +64,9 @@ namespace WebAPI.Controllers
             var result = _productService.DeleteProduct(productDeleteDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
         [HttpPost("SafeDelete")]
         public IActionResult SafeDeleteProduct(int productId)
@@ -74,9 +74,9 @@ namespace WebAPI.Controllers
             var result = _productService.SafeDeleteProduct(productId);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
-            return BadRequest();
+            return BadRequest(result);
         }
     }
 }

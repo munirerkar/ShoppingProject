@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,7 +25,7 @@ namespace Business.Concrete
             _productDal = productDal;
             _mapper = mapper;
         }
-
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult CreateProduct(ProductAddDto productAddDto)
         {
             var map = _mapper.Map<Product>(productAddDto);
@@ -38,25 +40,25 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public IDataResult<List<ProductDto>> GetAllProductsDeleted()
+        public async Task<List<ProductDto>> GetAllProductsDeleted()
         {
-            var products = _productDal.GetAll(p=> p.IsDeleted);
+            var products = await _productDal.GetAll(p=> p.IsDeleted);
             var map = _mapper.Map<List<ProductDto>>(products);
-            return new SuccessDataResult<List<ProductDto>>(Messages.ProductDeletedListed);
+            return map;
         }
 
-        public IDataResult<List<ProductDto>> GetAllProductsNonDeleted()
+        public async Task<List<ProductDto>> GetAllProductsNonDeleted()
         {
-            var products = _productDal.GetAll(p => !p.IsDeleted);
+            var products = await _productDal.GetAll(p => !p.IsDeleted);
             var map = _mapper.Map<List<ProductDto>>(products);
-            return new SuccessDataResult<List<ProductDto>>(Messages.ProductNonDeletedListed);
+            return map;
         }
 
-        public IDataResult<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
+        public async Task<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
         {
-            var products = _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
+            var products = await _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
             var map = _mapper.Map<List<ProductDto>>(products);
-            return new SuccessDataResult<List<ProductDto>>(Messages.ProductPriceListed);
+            return map;
         }
 
         public IResult SafeDeleteProduct(int productId)

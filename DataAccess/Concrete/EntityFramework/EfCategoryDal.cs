@@ -11,5 +11,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCategoryDal : EfEntityRepositoryBase<Category, ShoppingDbContext>, ICategoryDal
     {
+        
     }
 }

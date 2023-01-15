@@ -11,9 +11,9 @@ namespace Business.Abstract
 {
     public interface IProductService
     {
-        IDataResult<List<ProductDto>> GetAllProductsNonDeleted();
-        IDataResult<List<ProductDto>> GetAllProductsDeleted();
-        IDataResult<List<ProductDto>> GetByUnitPrice(decimal min, decimal max);
+        Task<List<ProductDto>> GetAllProductsNonDeleted();
+        Task<List<ProductDto>> GetAllProductsDeleted();
+        Task<List<ProductDto>> GetByUnitPrice(decimal min, decimal max);
         IResult CreateProduct(ProductAddDto productAddDto);
         IResult UpdateProduct(ProductUpdateDto productUpdateDto);
         IResult DeleteProduct(ProductDeleteDto productDeleteDto);
