@@ -21,12 +21,7 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductsNonDeleted()
         {
             var result = _productService.GetAllProductsNonDeleted();
-            if (result.IsCompleted)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-
+            return Ok(result);
         }
         [HttpGet("GetAllDeleted")]
         public IActionResult GetAllProductsDeleted()

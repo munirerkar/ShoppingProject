@@ -20,7 +20,7 @@ namespace DataAccess.Mapping
                 BrandId = 1,
                 ProductName = "Asus Oyuncu Laptop",
                 ProductDescription = "Asus oyuncular için mükemmel bir laptop tasarladı",
-                BarcodeNumber = "8888888888884",
+                BarcodeNumber = "888888888888",
                 UnitOfStock = 23,
                 UnitPrice = 19999.99m,
             },

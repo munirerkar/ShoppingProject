@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,8 @@ namespace Business.Abstract
     {
         Task<List<Category>> GetAllCategoriesNonDeleted();
         Task<List<Category>> GetAllCategoriesDeleted();
-        Task CreateCategory(Category category);
-        Task UpdateCategory(Category category);
-        Task DeleteCategory(Category category);
+        IResult CreateCategory(Category category);
+        IResult UpdateCategory(Category category);
+        IResult DeleteCategory(Category category);
     }
 }

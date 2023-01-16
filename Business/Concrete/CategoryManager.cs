@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Repository.Abstract;
 using Entities.Concrete;
@@ -18,9 +20,10 @@ namespace Business.Concrete
         {
             _categoryDal = categoryDal;
         }
-        public async Task CreateCategory(Category category)
+        public IResult CreateCategory(Category category)
         {
-             await _categoryDal.Add(category);
+             _categoryDal.Add(category);
+             return new SuccessResult(Messages.CategoryAdded);
         }
 
         public async Task<List<Category>> GetAllCategoriesNonDeleted()
@@ -28,14 +31,16 @@ namespace Business.Concrete
             return await _categoryDal.GetAll(x => !x.IsDeleted);
         }
 
-        public async Task DeleteCategory(Category category)
+        public IResult DeleteCategory(Category category)
         {
-            await _categoryDal.Delete(category);
+            _categoryDal.Delete(category);
+            return new SuccessResult(Messages.CategoryDeleted);
         }
 
-        public async Task UpdateCategory(Category category)
+        public IResult UpdateCategory(Category category)
         {
-            await _categoryDal.Update(category);
+            _categoryDal.Update(category);
+            return new SuccessResult(Messages.CategoryUpdated);
         }
 
         public async Task<List<Category>> GetAllCategoriesDeleted()

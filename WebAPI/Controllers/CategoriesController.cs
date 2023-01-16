@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,20 +29,32 @@ namespace WebAPI.Controllers
         [HttpPost("Add")]
         public IActionResult CreateCategory(Category category)
         {
-            _categoryService.CreateCategory(category);
-            return Ok();
+            var result = _categoryService.CreateCategory(category);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPost("Update")]
         public IActionResult UpdateCategory(Category category)
         {
-            _categoryService.UpdateCategory(category);
-            return Ok();
+            var result = _categoryService.UpdateCategory(category);
+            if (result.Success)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
         [HttpDelete("Delete")]
         public IActionResult DeleteCategory(Category category)
         {
-            _categoryService.DeleteCategory(category);
-            return Ok();
+            var result = _categoryService.DeleteCategory(category);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

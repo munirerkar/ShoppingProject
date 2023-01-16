@@ -1,4 +1,5 @@
-﻿using Entities.DTOs;
+﻿using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,16 @@ namespace Business.Constants
         public static string ProductNonDeletedListed = "Ürünler Listelendi";
         public static string ProductDeletedListed = "Ürünler Listelendi";
         public static string ProductPriceListed = "Belirlediğiniz Fiyattaki Ürünler Listelendi";
+
+        public static string CategoryAdded = "Kategori Eklendi";
+        public static string CategoryUpdated = "Kategori Güncellendi";
+        public static string CategoryDeleted = "Kategori Silindi";
+
+        public static string CategoryNonDeletedListed = "Kategoriler Listelendi";
+        public static string CategoryDeletedListed = "Silinmiş Kategoriler Listelendi";
+
+        public static string BrandAdded = "Marka Eklendi";
+        public static string BrandDeleted = "Marka Silindi";
+        public static string BrandUpdated = "Marka Güncellendi";
     }
 }

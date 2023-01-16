@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Utilities.Results;
+using Entities.Concrete;
 
 namespace Business.Abstract
 {
@@ -6,8 +7,8 @@ namespace Business.Abstract
     {
         Task<List<Brand>> GetAllBrandNonDeleted();
         Task<List<Brand>> GetAllBrandDeleted();
-        Task CreateBrand(Brand brand);
-        Task UpdateBrand(Brand brand);
-        Task DeleteBrand(Brand brand);
+        IResult CreateBrand(Brand brand);
+        IResult UpdateBrand(Brand brand);
+        IResult DeleteBrand(Brand brand);
     }
 }

@@ -28,20 +28,32 @@ namespace WebAPI.Controllers
         [HttpPost("Add")]
         public IActionResult CreateCategory(Brand brand)
         {
-            _brandService.CreateBrand(brand);
-            return Ok();
+            var result = _brandService.CreateBrand(brand);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpPost("Update")]
         public IActionResult UpdateCategory(Brand brand)
         {
-            _brandService.UpdateBrand(brand);
-            return Ok();
+            var result = _brandService.UpdateBrand(brand);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpDelete("Delete")]
         public IActionResult DeleteCategory(Brand brand)
         {
-            _brandService.DeleteBrand(brand);
-            return Ok();
+            var result = _brandService.DeleteBrand(brand);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }

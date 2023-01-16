@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -19,15 +21,16 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public async Task CreateBrand(Brand brand)
+        public IResult CreateBrand(Brand brand)
         {
-            await _brandDal.Add(brand);
-
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandAdded);
         }
 
-        public async Task DeleteBrand(Brand brand)
+        public  IResult DeleteBrand(Brand brand)
         {
-            await _brandDal.Delete(brand);
+            _brandDal.Delete(brand);
+            return new SuccessResult(Messages.BrandDeleted);
         }
 
         public async Task<List<Brand>> GetAllBrandDeleted()
@@ -41,9 +44,10 @@ namespace Business.Concrete
             return await _brandDal.GetAll(x => !x.IsDeleted);
         }
 
-        public async Task UpdateBrand(Brand brand)
+        public  IResult UpdateBrand(Brand brand)
         {
-            await _brandDal.Update(brand);
+            _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandUpdated);
         }
     }
 }

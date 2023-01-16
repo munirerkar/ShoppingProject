@@ -29,7 +29,7 @@ namespace Business.Concrete
         public IResult CreateProduct(ProductAddDto productAddDto)
         {
             var map = _mapper.Map<Product>(productAddDto);
-            _productDal.Add(map);
+             _productDal.Add(map);
             return new SuccessResult(Messages.ProductAdded);
         }
 
@@ -66,7 +66,7 @@ namespace Business.Concrete
             var product = _productDal.Get(p => p.ProductId == productId);
             var map = _mapper.Map<Product>(product);
             map.IsDeleted = true;
-            _productDal.Update(map);
+             _productDal.Update(map);
             return new SuccessResult(Messages.ProductSafeDeleted);
         }
 
@@ -75,7 +75,7 @@ namespace Business.Concrete
             var product = _productDal.Get(p => p.ProductId == productId);
             var map = _mapper.Map<Product>(product);
             map.IsDeleted = false;
-            _productDal.Update(map);
+             _productDal.Update(map);
             return new SuccessResult(Messages.ProductUndoDeleted);
         }
 
