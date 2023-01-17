@@ -33,15 +33,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandDeleted);
         }
 
-        public async Task<List<Brand>> GetAllBrandDeleted()
+        public IDataResult<List<Brand>> GetAllBrandDeleted()
         {
-            return await _brandDal.GetAll(x => x.IsDeleted);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(x => x.IsDeleted));
 
         }
 
-        public async Task<List<Brand>> GetAllBrandNonDeleted()
+        public IDataResult<List<Brand>> GetAllBrandNonDeleted()
         {
-            return await _brandDal.GetAll(x => !x.IsDeleted);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(x => !x.IsDeleted));
         }
 
         public  IResult UpdateBrand(Brand brand)

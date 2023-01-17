@@ -10,8 +10,8 @@ namespace Business.Abstract
 {
     public interface ICategoryService
     {
-        Task<List<Category>> GetAllCategoriesNonDeleted();
-        Task<List<Category>> GetAllCategoriesDeleted();
+        IDataResult<List<Category>> GetAllCategoriesNonDeleted();
+        IDataResult<List<Category>> GetAllCategoriesDeleted();
         IResult CreateCategory(Category category);
         IResult UpdateCategory(Category category);
         IResult DeleteCategory(Category category);

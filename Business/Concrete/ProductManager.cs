@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Autofac.Validation;
@@ -40,25 +41,26 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public async Task<List<ProductDto>> GetAllProductsDeleted()
+        public IDataResult<List<ProductDto>> GetAllProductsDeleted()
         {
-            var products = await _productDal.GetAll(p=> p.IsDeleted);
+            var products = _productDal.GetAll(p=> p.IsDeleted);
             var map = _mapper.Map<List<ProductDto>>(products);
-            return map;
+            return new SuccessDataResult<List<ProductDto>>(map);
+
+        }
+        [SecuredOperation("superadmin,admin")]
+        public IDataResult<List<ProductDto>> GetAllProductsNonDeleted()
+        {
+            var products = _productDal.GetAll(p => !p.IsDeleted);
+            var map = _mapper.Map<List<ProductDto>>(products);
+            return new SuccessDataResult<List<ProductDto>>(map);
         }
 
-        public async Task<List<ProductDto>> GetAllProductsNonDeleted()
+        public  IDataResult<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
         {
-            var products = await _productDal.GetAll(p => !p.IsDeleted);
+            var products = _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
             var map = _mapper.Map<List<ProductDto>>(products);
-            return map;
-        }
-
-        public async Task<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
-        {
-            var products = await _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
-            var map = _mapper.Map<List<ProductDto>>(products);
-            return map;
+            return new SuccessDataResult<List<ProductDto>>(map);
         }
 
         public IResult SafeDeleteProduct(int productId)

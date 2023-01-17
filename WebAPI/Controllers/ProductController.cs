@@ -21,13 +21,17 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductsNonDeleted()
         {
             var result = _productService.GetAllProductsNonDeleted();
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("GetAllDeleted")]
         public IActionResult GetAllProductsDeleted()
         {
             var result = _productService.GetAllProductsDeleted();
-            if (result.IsCompleted)
+            if (result.Success)
             {
                 return Ok(result);
             }

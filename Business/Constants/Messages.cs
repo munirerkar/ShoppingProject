@@ -1,8 +1,10 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,5 +33,14 @@ namespace Business.Constants
         public static string BrandAdded = "Marka Eklendi";
         public static string BrandDeleted = "Marka Silindi";
         public static string BrandUpdated = "Marka Güncellendi";
+
+        public static string UserRegistered = "Kayıt Oldunuz";
+        public static string UserNotFound = "Kullanıcı Bulunamadı";
+        public static string PasswordError = "Parola Hatalı";
+        public static string SuccessfulLogin = "Giriş Başarılı";
+        public static string UserAlreadyExists = "Bu kullanıcı zaten var";
+        public static string AccessTokenCreated = "Token Oluşturuldu";
+
+        public static string AuthorizationDenied = "Giriş Rededildi";
     }
 }

@@ -26,9 +26,9 @@ namespace Business.Concrete
              return new SuccessResult(Messages.CategoryAdded);
         }
 
-        public async Task<List<Category>> GetAllCategoriesNonDeleted()
+        public IDataResult<List<Category>> GetAllCategoriesNonDeleted()
         {
-            return await _categoryDal.GetAll(x => !x.IsDeleted);
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(x => !x.IsDeleted));
         }
 
         public IResult DeleteCategory(Category category)
@@ -43,9 +43,9 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryUpdated);
         }
 
-        public async Task<List<Category>> GetAllCategoriesDeleted()
+        public  IDataResult<List<Category>> GetAllCategoriesDeleted()
         {
-            return await _categoryDal.GetAll(x => x.IsDeleted);
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(x => x.IsDeleted));
         }
     }
 }
