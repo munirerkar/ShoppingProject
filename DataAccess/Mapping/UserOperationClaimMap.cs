@@ -14,7 +14,7 @@ namespace DataAccess.Mapping
         public void Configure(EntityTypeBuilder<UserOperationClaim> builder)
         {
             // Primary key
-            builder.HasKey(r => new { r.UserId, r.OperationClaimId });
+            builder.HasKey(r => r.UserOperationClaimId);
 
             // Maps to the UserOperationClaims table
             builder.ToTable("UserOperationClaims");

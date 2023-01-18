@@ -16,7 +16,7 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -108,18 +108,23 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Core.Entities.Concrete.UserOperationClaim", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("UserOperationClaimId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserOperationClaimId"));
 
                     b.Property<int>("OperationClaimId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserOperationClaimId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "OperationClaimId");
+                    b.HasKey("UserOperationClaimId");
 
                     b.HasIndex("OperationClaimId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserOperationClaims", (string)null);
                 });
