@@ -15,6 +15,8 @@ namespace Entities.Concrete
         public Category Category { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public string BarcodeNumber { get; set; }
