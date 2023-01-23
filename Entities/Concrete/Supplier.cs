@@ -18,6 +18,8 @@ namespace Entities.Concrete
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public int? ImageId { get; set; }
+        public Image Image { get; set; }
         public bool IsDeleted { get; set; } = false;
     }
 }

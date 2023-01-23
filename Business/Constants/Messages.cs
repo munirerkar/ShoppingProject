@@ -42,5 +42,9 @@ namespace Business.Constants
         public static string AccessTokenCreated = "Token Oluşturuldu";
 
         public static string AuthorizationDenied = "Giriş Rededildi";
+
+        public static string Added = "Eklendi";
+        public static string Deleted = "Silindi";
+        public static string Updated = "Güncellendi";
     }
 }

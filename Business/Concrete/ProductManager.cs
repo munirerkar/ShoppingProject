@@ -8,6 +8,8 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
