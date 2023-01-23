@@ -25,6 +25,9 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Shipper> Shippers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder) 
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
