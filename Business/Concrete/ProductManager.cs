@@ -50,7 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<ProductDto>>(map);
 
         }
-        [SecuredOperation("superadmin,admin")]
+        //[SecuredOperation("superadmin,admin")]
         public IDataResult<List<ProductDto>> GetAllProductsNonDeleted()
         {
             var products = _productDal.GetAll(p => !p.IsDeleted);

@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCart(Cart cart)
+        public IActionResult CreateCart(CartAddDto cartAddDto)
         {
-            var result = _cartService.CreateCart(cart);
+            var result = _cartService.CreateCart(cartAddDto);
             if (result.Success)
             {
                 return Ok(result);

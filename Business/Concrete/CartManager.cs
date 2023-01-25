@@ -1,8 +1,10 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +16,18 @@ namespace Business.Concrete
     public class CartManager : ICartService
     {
         ICartDal _cartDal;
+        IMapper _mapper;
 
-        public CartManager(ICartDal cartDal)
+        public CartManager(ICartDal cartDal,IMapper mapper)
         {
             _cartDal = cartDal;
+            _mapper = mapper;
         }
 
-        public IResult CreateCart(Cart cart)
+        public IResult CreateCart(CartAddDto cartAddDto)
         {
-            _cartDal.Add(cart);
+            var map = _mapper.Map<Cart>(cartAddDto);
+            _cartDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
