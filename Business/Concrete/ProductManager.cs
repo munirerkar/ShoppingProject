@@ -3,6 +3,8 @@ using Business.Abstract;
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Autofac.Caching;
+using Core.Autofac.Performance;
 using Core.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -29,6 +31,7 @@ namespace Business.Concrete
             _mapper = mapper;
         }
         [ValidationAspect(typeof(ProductValidator))]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult CreateProduct(ProductAddDto productAddDto)
         {
             var map = _mapper.Map<Product>(productAddDto);
@@ -51,13 +54,14 @@ namespace Business.Concrete
 
         }
         //[SecuredOperation("superadmin,admin")]
+        [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<ProductDto>> GetAllProductsNonDeleted()
         {
             var products = _productDal.GetAll(p => !p.IsDeleted);
             var map = _mapper.Map<List<ProductDto>>(products);
             return new SuccessDataResult<List<ProductDto>>(map);
         }
-
         public  IDataResult<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
         {
             var products = _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);
@@ -82,7 +86,7 @@ namespace Business.Concrete
              _productDal.Update(map);
             return new SuccessResult(Messages.ProductUndoDeleted);
         }
-
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult UpdateProduct(ProductUpdateDto productUpdateDto)
         {
             var map = _mapper.Map<Product>(productUpdateDto);
