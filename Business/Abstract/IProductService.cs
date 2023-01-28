@@ -1,6 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -14,6 +14,7 @@ namespace Business.Abstract
     {
         IDataResult<List<ProductDto>> GetAllProductsNonDeleted();
         IDataResult<List<ProductDto>> GetAllProductsDeleted();
+        IDataResult<List<ProductDto>> GetByProductId(int productId);
         IDataResult<List<ProductDto>> GetByUnitPrice(decimal min, decimal max);
         IResult CreateProduct(ProductAddDto productAddDto);
         IResult UpdateProduct(ProductUpdateDto productUpdateDto);

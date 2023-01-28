@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.Cart;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCart(CartAddDto cartAddDto)
+        public IActionResult CreateCart(CartDto cartDto)
         {
-            var result = _cartService.CreateCart(cartAddDto);
+            var result = _cartService.CreateCart(cartDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -38,9 +38,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Update")]
-        public IActionResult UpdateCart(Cart cart)
+        public IActionResult UpdateCart(CartDto cartDto)
         {
-            var result = _cartService.UpdateCart(cart);
+            var result = _cartService.UpdateCart(cartDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,9 +48,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteCart(Cart cart)
+        public IActionResult DeleteCart(CartDto cartDto)
         {
-            var result = _cartService.DeleteCart(cart);
+            var result = _cartService.DeleteCart(cartDto);
             if (result.Success)
             {
                 return Ok(result);

@@ -1,8 +1,10 @@
-﻿using Business.Abstract;
+﻿using AutoMapper;
+using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,32 +16,39 @@ namespace Business.Concrete
     public class OrderManager : IOrderService
     {
         IOrderDal _orderDal;
+        IMapper _mapper;
 
-        public OrderManager(IOrderDal orderDal)
+        public OrderManager(IOrderDal orderDal,IMapper mapper)
         {
             _orderDal = orderDal;
+            _mapper = mapper;
         }
 
-        public IResult CreateOrder(Order order)
+        public IResult CreateOrder(OrderDto orderDto)
         {
-            _orderDal.Add(order);
+            var map = _mapper.Map<Order>(orderDto);
+            _orderDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult DeleteOrder(Order order)
+        public IResult DeleteOrder(OrderDto orderDto)
         {
-            _orderDal.Delete(order);
+            var map = _mapper.Map<Order>(orderDto);
+            _orderDal.Delete(map);
             return new SuccessResult(Messages.Deleted);
         }
 
-        public IDataResult<List<Order>> GetAllOrders()
+        public IDataResult<List<OrderDto>> GetAllOrders()
         {
-            return new SuccessDataResult<List<Order>>(_orderDal.GetAll());
+            var orders = _orderDal.GetAll();
+            var map = _mapper.Map<List<OrderDto>>(orders);
+            return new SuccessDataResult<List<OrderDto>>(map);
         }
 
-        public IResult UpdateOrder(Order order)
+        public IResult UpdateOrder(OrderDto orderDto)
         {
-            _orderDal.Update(order);
+            var map = _mapper.Map<Order>(orderDto);
+            _orderDal.Update(map);
             return new SuccessResult(Messages.Updated);
         }
     }

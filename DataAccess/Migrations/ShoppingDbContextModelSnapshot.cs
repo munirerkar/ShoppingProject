@@ -268,11 +268,11 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.Customer", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("CustomerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("Address1")
                         .IsRequired()
@@ -302,6 +302,10 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CVV")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CardExpMo")
                         .HasColumnType("int");
 
@@ -317,10 +321,6 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreditCard")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CreditCardTypeID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -359,11 +359,39 @@ namespace DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("CustomerID");
+                    b.HasKey("CustomerId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            Address1 = "Kadırgalar cd.",
+                            Address2 = "Şişli İstanbul",
+                            BillingAddress = "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye",
+                            BillingCity = "İstanbul",
+                            BillingCountry = "Türkiye",
+                            BillingPostalCode = "34444",
+                            BillingType = "Ev",
+                            CVV = "829",
+                            CardExpMo = 10,
+                            CardExpYr = 2027,
+                            City = "İstanbul",
+                            Country = "Türkiye",
+                            CreditCard = "4337950475337442",
+                            FirstName = "Münir",
+                            LastName = "Erkar",
+                            PostalCode = "34444",
+                            ShipAddress = "Taksim",
+                            ShipCity = "İstanbul",
+                            ShipCountry = "Türkiye",
+                            ShipPostalCode = "34454",
+                            TcNo = "12345678912",
+                            UserId = 1
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Image", b =>
@@ -399,7 +427,7 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
+                    b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ShipDate")
@@ -412,11 +440,162 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("PaymentId");
 
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderId = 1,
+                            CustomerId = 1,
+                            OrderDate = new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9146),
+                            PaymentId = 1,
+                            ShipDate = new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9158),
+                            ShipperId = 1
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"));
+
+                    b.Property<DateTime>("BillDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SupplierId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("OrderedId");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Ordered", b =>
+                {
+                    b.Property<int>("OrderedId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderedId"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Shipped")
+                        .HasColumnType("bit");
+
+                    b.HasKey("OrderedId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Ordereds");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentId"));
+
+                    b.Property<bool>("Allowed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PaymentId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Payments");
+
+                    b.HasData(
+                        new
+                        {
+                            PaymentId = 1,
+                            Allowed = true,
+                            CustomerId = 1,
+                            PaymentType = "Visa"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Product", b =>
@@ -546,6 +725,14 @@ namespace DataAccess.Migrations
                     b.HasKey("ShipperId");
 
                     b.ToTable("Shippers");
+
+                    b.HasData(
+                        new
+                        {
+                            ShipperId = 1,
+                            CompanyName = "Yürtiçi Kargo",
+                            Phone = "444 99 99"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Supplier", b =>
@@ -660,9 +847,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Product", "Product")
+                    b.HasOne("Entities.Concrete.Payment", "Payment")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -674,9 +861,74 @@ namespace DataAccess.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Product");
+                    b.Navigation("Payment");
 
                     b.Navigation("Shipper");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
+                {
+                    b.HasOne("Entities.Concrete.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.Ordered", "Ordered")
+                        .WithMany()
+                        .HasForeignKey("OrderedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Ordered");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Supplier");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Ordered", b =>
+                {
+                    b.HasOne("Entities.Concrete.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entities.Concrete.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Payment", b =>
+                {
+                    b.HasOne("Entities.Concrete.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Product", b =>

@@ -9,7 +9,7 @@ using Core.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using System;
@@ -62,6 +62,14 @@ namespace Business.Concrete
             var map = _mapper.Map<List<ProductDto>>(products);
             return new SuccessDataResult<List<ProductDto>>(map);
         }
+
+        public IDataResult<List<ProductDto>> GetByProductId(int productId)
+        {
+            var products = _productDal.GetAll(p => p.ProductId == productId);
+            var map = _mapper.Map<List<ProductDto>>(products);
+            return new SuccessDataResult<List<ProductDto>>(map);
+        }
+
         public  IDataResult<List<ProductDto>> GetByUnitPrice(decimal min,decimal max)
         {
             var products = _productDal.GetAll(p => p.UnitPrice >= min && p.UnitPrice <= max);

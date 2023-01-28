@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Concrete;
-using Entities.DTOs.Cart;
+using Entities.DTOs.Order;
+using Entities.DTOs.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace Business.AutoMapper
 {
-    public class CartProfile : Profile
+    public class PaymentProfile : Profile
     {
-        public CartProfile()
+        public PaymentProfile()
         {
-            CreateMap<CartDto, Cart>().ReverseMap();
+            CreateMap<PaymentDto, Payment>().ReverseMap();
+
         }
     }
 }

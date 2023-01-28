@@ -29,6 +29,10 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Shipper> Shippers { get; set; }
         public DbSet<Cart> Carts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<Ordered> Ordereds { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder builder) 
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

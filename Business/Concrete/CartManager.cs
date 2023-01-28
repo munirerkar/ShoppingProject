@@ -3,8 +3,10 @@ using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.Cart;
+using Entities.DTOs.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,27 +26,31 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult CreateCart(CartAddDto cartAddDto)
+        public IResult CreateCart(CartDto cartDto)
         {
-            var map = _mapper.Map<Cart>(cartAddDto);
+            var map = _mapper.Map<Cart>(cartDto);
             _cartDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult DeleteCart(Cart cart)
+        public IResult DeleteCart(CartDto cartDto)
         {
-            _cartDal.Delete(cart);
+            var map = _mapper.Map<Cart>(cartDto);
+            _cartDal.Delete(map);
             return new SuccessResult(Messages.Deleted);
         }
 
-        public IDataResult<List<Cart>> GetAllCarts()
+        public IDataResult<List<CartDto>> GetAllCarts()
         {
-            return new SuccessDataResult<List<Cart>>(_cartDal.GetAll());
+            var carts = _cartDal.GetAll();
+            var map = _mapper.Map<List<CartDto>>(carts);
+            return new SuccessDataResult<List<CartDto>>(map);
         }
 
-        public IResult UpdateCart(Cart cart)
+        public IResult UpdateCart(CartDto cartDto)
         {
-            _cartDal.Update(cart);
+            var map = _mapper.Map<Cart>(cartDto);
+            _cartDal.Update(map);
             return new SuccessResult(Messages.Updated);
         }
     }

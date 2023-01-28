@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
+using Entities.DTOs.Order;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +29,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateProduct(Order order)
+        public IActionResult CreateProduct(OrderDto orderDto)
         {
-            var result = _orderService.CreateOrder(order);
+            var result = _orderService.CreateOrder(orderDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -38,9 +39,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Update")]
-        public IActionResult UpdateProduct(Order order)
+        public IActionResult UpdateProduct(OrderDto orderDto)
         {
-            var result = _orderService.UpdateOrder(order);
+            var result = _orderService.UpdateOrder(orderDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,9 +49,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteProduct(Order order)
+        public IActionResult DeleteProduct(OrderDto orderDto)
         {
-            var result = _orderService.DeleteOrder(order);
+            var result = _orderService.DeleteOrder(orderDto);
             if (result.Success)
             {
                 return Ok(result);

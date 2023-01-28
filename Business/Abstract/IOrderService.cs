@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs.Order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace Business.Abstract
 {
     public interface IOrderService
     {
-        IDataResult<List<Order>> GetAllOrders();
-        IResult CreateOrder(Order order);
-        IResult UpdateOrder(Order order);
-        IResult DeleteOrder(Order order);
+        IDataResult<List<OrderDto>> GetAllOrders();
+        IResult CreateOrder(OrderDto orderDto);
+        IResult UpdateOrder(OrderDto orderDto);
+        IResult DeleteOrder(OrderDto orderDto);
     }
 }

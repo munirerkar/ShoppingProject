@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs;
+using Entities.DTOs.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +21,16 @@ namespace WebAPI.Controllers
         public IActionResult GetAllProductsNonDeleted()
         {
             var result = _productService.GetAllProductsNonDeleted();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("GetById")]
+        public IActionResult GetByProductId(int productId)
+        {
+            var result = _productService.GetByProductId(productId);
             if (result.Success)
             {
                 return Ok(result);

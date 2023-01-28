@@ -1,22 +1,19 @@
-﻿using Core.Entities.Concrete;
-using Entities.Abstract;
+﻿using Core.Entities;
+using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.Concrete
+namespace Entities.DTOs.Order
 {
-    public class Order : IEntity
+    public class OrderDto:IDto
     {
         public int OrderId { get; set; }
         public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
         public int ShipperId { get; set; }
-        public Shipper Shipper { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? ShipDate { get; set; }
     }
