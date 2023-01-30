@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShoppingDbContext))]
-    partial class ShoppingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230129180717_initialCreate2")]
+    partial class initialCreate2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -427,9 +430,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ShipDate")
                         .HasColumnType("datetime2");
 
@@ -440,8 +440,6 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("PaymentId");
-
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Orders");
@@ -451,9 +449,8 @@ namespace DataAccess.Migrations
                         {
                             OrderId = 1,
                             CustomerId = 1,
-                            OrderDate = new DateTime(2023, 1, 30, 20, 50, 50, 896, DateTimeKind.Local).AddTicks(4885),
-                            PaymentId = 1,
-                            ShipDate = new DateTime(2023, 1, 30, 20, 50, 50, 896, DateTimeKind.Local).AddTicks(4886),
+                            OrderDate = new DateTime(2023, 1, 29, 21, 7, 17, 402, DateTimeKind.Local).AddTicks(3599),
+                            ShipDate = new DateTime(2023, 1, 29, 21, 7, 17, 402, DateTimeKind.Local).AddTicks(3600),
                             ShipperId = 1
                         });
                 });
@@ -496,7 +493,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             OrderDetailId = 1,
-                            BillDate = new DateTime(2023, 1, 30, 20, 50, 50, 896, DateTimeKind.Local).AddTicks(4553),
+                            BillDate = new DateTime(2023, 1, 29, 21, 7, 17, 402, DateTimeKind.Local).AddTicks(3240),
                             OrderedId = 1,
                             Price = 500,
                             ProductId = 1,
@@ -571,7 +568,7 @@ namespace DataAccess.Migrations
                             Email = "mano@gmail.com",
                             FirstName = "Münir",
                             LastName = "Erkar",
-                            OrderDate = new DateTime(2023, 1, 30, 20, 50, 50, 896, DateTimeKind.Local).AddTicks(4743),
+                            OrderDate = new DateTime(2023, 1, 29, 21, 7, 17, 402, DateTimeKind.Local).AddTicks(3370),
                             Phone = "05554879878",
                             PostalCode = "34444",
                             Shipped = true
@@ -589,11 +586,16 @@ namespace DataAccess.Migrations
                     b.Property<bool>("Allowed")
                         .HasColumnType("bit");
 
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PaymentType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PaymentId");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Payments");
 
@@ -602,6 +604,7 @@ namespace DataAccess.Migrations
                         {
                             PaymentId = 1,
                             Allowed = true,
+                            CustomerId = 1,
                             PaymentType = "Visa"
                         });
                 });
@@ -855,12 +858,6 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Concrete.Shipper", "Shipper")
                         .WithMany()
                         .HasForeignKey("ShipperId")
@@ -868,8 +865,6 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Customer");
-
-                    b.Navigation("Payment");
 
                     b.Navigation("Shipper");
                 });
@@ -894,6 +889,17 @@ namespace DataAccess.Migrations
                 });
 
             modelBuilder.Entity("Entities.Concrete.Ordered", b =>
+                {
+                    b.HasOne("Entities.Concrete.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Payment", b =>
                 {
                     b.HasOne("Entities.Concrete.Customer", "Customer")
                         .WithMany()

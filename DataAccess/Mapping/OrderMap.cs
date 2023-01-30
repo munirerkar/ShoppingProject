@@ -19,7 +19,7 @@ namespace DataAccess.Mapping
                 CustomerId= 1,
                 PaymentId= 1,
                 ShipperId= 1,
-                OrderDate= DateTime.Now,
+                OrderDate = DateTime.Now,
                 ShipDate = DateTime.Now,
             });
         }

@@ -23,28 +23,28 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult CreateOrder(PaymentDto paymentDto)
+        public IResult CreatePayment(PaymentDto paymentDto)
         {
             var map = _mapper.Map<Payment>(paymentDto);
             _paymentDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult DeleteOrder(PaymentDto paymentDto)
+        public IResult DeletePayment(PaymentDto paymentDto)
         {
             var map = _mapper.Map<Payment>(paymentDto);
             _paymentDal.Delete(map);
             return new SuccessResult(Messages.Deleted);
         }
 
-        public IDataResult<List<PaymentDto>> GetAllOrders()
+        public IDataResult<List<PaymentDto>> GetAllPayments()
         {
             var payments = _paymentDal.GetAll();
             var map = _mapper.Map<List<PaymentDto>>(payments);
             return new SuccessDataResult<List<PaymentDto>>(map);
         }
 
-        public IResult UpdateOrder(PaymentDto paymentDto)
+        public IResult UpdatePayment(PaymentDto paymentDto)
         {
             var map = _mapper.Map<Payment>(paymentDto);
             _paymentDal.Update(map);

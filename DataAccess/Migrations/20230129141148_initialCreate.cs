@@ -43,6 +43,39 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TcNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreditCard = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CardExpMo = table.Column<int>(type: "int", nullable: false),
+                    CardExpYr = table.Column<int>(type: "int", nullable: false),
+                    BillingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BillingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BillingCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BillingCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BillingPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShipAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShipCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShipPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ShipCountry = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -131,45 +164,7 @@ namespace DataAccess.Migrations
                         principalColumn: "ImageId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    TcNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreditCard = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CVV = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CardExpMo = table.Column<int>(type: "int", nullable: false),
-                    CardExpYr = table.Column<int>(type: "int", nullable: false),
-                    BillingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BillingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BillingCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BillingCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BillingPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipCity = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipPostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ShipCountry = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
-                    table.ForeignKey(
-                        name: "FK_Customers_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            
 
             migrationBuilder.CreateTable(
                 name: "UserOperationClaims",
@@ -243,27 +238,6 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Payments",
-                columns: table => new
-                {
-                    PaymentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Allowed = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Payments", x => x.PaymentId);
-                    table.ForeignKey(
-                        name: "FK_Payments_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Carts",
                 columns: table => new
                 {
@@ -284,120 +258,7 @@ namespace DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PaymentId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    ShipperId = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ShipDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
-                    table.ForeignKey(
-                        name: "FK_Orders_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Payments_PaymentId",
-                        column: x => x.PaymentId,
-                        principalTable: "Payments",
-                        principalColumn: "PaymentId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Shippers_ShipperId",
-                        column: x => x.ShipperId,
-                        principalTable: "Shippers",
-                        principalColumn: "ShipperId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Ordereds",
-                columns: table => new
-                {
-                    OrderedId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Shipped = table.Column<bool>(type: "bit", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ordereds", x => x.OrderedId);
-                    table.ForeignKey(
-                        name: "FK_Ordereds_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ordereds_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderDetails",
-                columns: table => new
-                {
-                    OrderDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SupplierId = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false),
-                    OrderedId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    Total = table.Column<int>(type: "int", nullable: false),
-                    BillDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Ordereds_OrderedId",
-                        column: x => x.OrderedId,
-                        principalTable: "Ordereds",
-                        principalColumn: "OrderedId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "OrderId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_OrderDetails_Suppliers_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "Suppliers",
-                        principalColumn: "SupplierId",
-                        onDelete: ReferentialAction.Cascade);
-                });
+           
 
             migrationBuilder.InsertData(
                 table: "Brands",
@@ -425,8 +286,8 @@ namespace DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Customers",
-                columns: new[] { "CustomerId", "Address1", "Address2", "BillingAddress", "BillingCity", "BillingCountry", "BillingPostalCode", "BillingType", "CVV", "CardExpMo", "CardExpYr", "City", "Country", "CreditCard", "FirstName", "LastName", "PostalCode", "ShipAddress", "ShipCity", "ShipCountry", "ShipPostalCode", "TcNo", "UserId" },
-                values: new object[] { 1, "Kadırgalar cd.", "Şişli İstanbul", "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye", "İstanbul", "Türkiye", "34444", "Ev", "829", 10, 2027, "İstanbul", "Türkiye", "4337950475337442", "Münir", "Erkar", "34444", "Taksim", "İstanbul", "Türkiye", "34454", "12345678912", 1 });
+                columns: new[] { "CustomerId", "Address1", "Address2", "BillingAddress", "BillingCity", "BillingCountry", "BillingPostalCode", "BillingType", "CVV", "CardExpMo", "CardExpYr", "City", "Country", "CreditCard", "FirstName", "LastName", "PostalCode", "ShipAddress", "ShipCity", "ShipCountry", "ShipPostalCode", "TcNo" },
+                values: new object[] { 1, "Kadırgalar cd.", "Şişli İstanbul", "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye", "İstanbul", "Türkiye", "34444", "Ev", "829", 10, 2027, "İstanbul", "Türkiye", "4337950475337442", "Münir", "Erkar", "34444", "Taksim", "İstanbul", "Türkiye", "34454", "12345678912" });
 
             migrationBuilder.InsertData(
                 table: "OperationClaims",
@@ -448,10 +309,7 @@ namespace DataAccess.Migrations
                 columns: new[] { "SupplierId", "Address", "City", "CompanyName", "ContactName", "Country", "Email", "ImageId", "IsDeleted", "Phone", "PostalCode" },
                 values: new object[] { 1, "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye", "İstanbul", "Mano", "Münir Erkar", "Türkiye", "mano@gmail.com", null, false, "5432432248", 34400 });
 
-            migrationBuilder.InsertData(
-                table: "Payments",
-                columns: new[] { "PaymentId", "Allowed", "CustomerId", "PaymentType" },
-                values: new object[] { 1, true, 1, "Visa" });
+           
 
             migrationBuilder.InsertData(
                 table: "Products",
@@ -464,70 +322,14 @@ namespace DataAccess.Migrations
                     { 4, "879999999991", 4, 4, null, false, "Casper oyuncular için mükemmel bir laptop tasarladı", "Casper Oyuncu Laptop", 1, 30, 17999.99m }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "OrderId", "CustomerId", "OrderDate", "PaymentId", "ShipDate", "ShipperId" },
-                values: new object[] { 1, 1, new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9146), 1, new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9158), 1 });
+            
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_ProductId",
                 table: "Carts",
                 column: "ProductId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Customers_UserId",
-                table: "Customers",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderedId",
-                table: "OrderDetails",
-                column: "OrderedId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrderId",
-                table: "OrderDetails",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProductId",
-                table: "OrderDetails",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_SupplierId",
-                table: "OrderDetails",
-                column: "SupplierId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ordereds_CustomerId",
-                table: "Ordereds",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ordereds_OrderId",
-                table: "Ordereds",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_CustomerId",
-                table: "Orders",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_PaymentId",
-                table: "Orders",
-                column: "PaymentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Orders_ShipperId",
-                table: "Orders",
-                column: "ShipperId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Payments_CustomerId",
-                table: "Payments",
-                column: "CustomerId");
+           
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -572,22 +374,22 @@ namespace DataAccess.Migrations
                 name: "Carts");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
-
-            migrationBuilder.DropTable(
                 name: "UserOperationClaims");
-
-            migrationBuilder.DropTable(
-                name: "Ordereds");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "Shippers");
+
+            migrationBuilder.DropTable(
                 name: "OperationClaims");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Brands");
@@ -599,19 +401,7 @@ namespace DataAccess.Migrations
                 name: "Suppliers");
 
             migrationBuilder.DropTable(
-                name: "Payments");
-
-            migrationBuilder.DropTable(
-                name: "Shippers");
-
-            migrationBuilder.DropTable(
                 name: "Images");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }

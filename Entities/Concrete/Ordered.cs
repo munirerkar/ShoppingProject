@@ -14,8 +14,6 @@ namespace Entities.Concrete
         public int OrderedId { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
         public DateTime? OrderDate { get; set; }
         public bool? Shipped { get; set; }
         public string FirstName { get; set; }

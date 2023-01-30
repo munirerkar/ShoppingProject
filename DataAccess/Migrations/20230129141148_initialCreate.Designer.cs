@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShoppingDbContext))]
-    [Migration("20230128223900_initialCreate")]
+    [Migration("20230129141148_initialCreate")]
     partial class initialCreate
     {
         /// <inheritdoc />
@@ -359,12 +359,7 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("CustomerId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
 
@@ -392,8 +387,7 @@ namespace DataAccess.Migrations
                             ShipCity = "İstanbul",
                             ShipCountry = "Türkiye",
                             ShipPostalCode = "34454",
-                            TcNo = "12345678912",
-                            UserId = 1
+                            TcNo = "12345678912"
                         });
                 });
 
@@ -430,9 +424,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PaymentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("ShipDate")
                         .HasColumnType("datetime2");
 
@@ -443,8 +434,6 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("PaymentId");
-
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Orders");
@@ -454,9 +443,8 @@ namespace DataAccess.Migrations
                         {
                             OrderId = 1,
                             CustomerId = 1,
-                            OrderDate = new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9146),
-                            PaymentId = 1,
-                            ShipDate = new DateTime(2023, 1, 29, 1, 39, 0, 207, DateTimeKind.Local).AddTicks(9158),
+                            OrderDate = new DateTime(2023, 1, 29, 17, 11, 47, 958, DateTimeKind.Local).AddTicks(9589),
+                            ShipDate = new DateTime(2023, 1, 29, 17, 11, 47, 958, DateTimeKind.Local).AddTicks(9590),
                             ShipperId = 1
                         });
                 });
@@ -472,9 +460,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("BillDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("OrderedId")
                         .HasColumnType("int");
 
@@ -487,23 +472,28 @@ namespace DataAccess.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupplierId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("OrderDetailId");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("OrderedId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("SupplierId");
-
                     b.ToTable("OrderDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderDetailId = 1,
+                            BillDate = new DateTime(2023, 1, 29, 17, 11, 47, 958, DateTimeKind.Local).AddTicks(9361),
+                            OrderedId = 1,
+                            Price = 500,
+                            ProductId = 1,
+                            Quantity = 1,
+                            Total = 1
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Ordered", b =>
@@ -544,9 +534,6 @@ namespace DataAccess.Migrations
                     b.Property<DateTime?>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -562,9 +549,24 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Ordereds");
+
+                    b.HasData(
+                        new
+                        {
+                            OrderedId = 1,
+                            Address = "Kadırgalar cd. İstanbul",
+                            City = "İstanbul",
+                            Country = "Türkiye",
+                            CustomerId = 1,
+                            Email = "mano@gmail.com",
+                            FirstName = "Münir",
+                            LastName = "Erkar",
+                            OrderDate = new DateTime(2023, 1, 29, 17, 11, 47, 958, DateTimeKind.Local).AddTicks(9480),
+                            Phone = "05554879878",
+                            PostalCode = "34444",
+                            Shipped = true
+                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>
@@ -831,28 +833,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Entities.Concrete.Customer", b =>
-                {
-                    b.HasOne("Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Entities.Concrete.Order", b =>
                 {
                     b.HasOne("Entities.Concrete.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Concrete.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -864,19 +849,11 @@ namespace DataAccess.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("Payment");
-
                     b.Navigation("Shipper");
                 });
 
             modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
                 {
-                    b.HasOne("Entities.Concrete.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Entities.Concrete.Ordered", "Ordered")
                         .WithMany()
                         .HasForeignKey("OrderedId")
@@ -889,19 +866,9 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
                     b.Navigation("Ordered");
 
                     b.Navigation("Product");
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Ordered", b =>
@@ -912,15 +879,7 @@ namespace DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>

@@ -10,8 +10,6 @@ namespace Entities.Concrete
     public class Payment : IEntity
     {
         public int PaymentId { get; set; }
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
         public string PaymentType { get; set; }
         public bool Allowed { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -13,11 +14,9 @@ namespace DataAccess.Mapping
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
-
             builder.HasData(new Payment
             {
                 PaymentId = 1,
-                CustomerId= 1,
                 PaymentType = "Visa",
                 Allowed = true
             });

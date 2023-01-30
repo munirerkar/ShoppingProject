@@ -11,9 +11,9 @@ namespace Business.Abstract
 {
     public interface IPaymentService
     {
-        IDataResult<List<PaymentDto>> GetAllOrders();
-        IResult CreateOrder(PaymentDto paymentDto);
-        IResult UpdateOrder(PaymentDto paymentDto);
-        IResult DeleteOrder(PaymentDto paymentDto);
+        IDataResult<List<PaymentDto>> GetAllPayments();
+        IResult CreatePayment(PaymentDto paymentDto);
+        IResult UpdatePayment(PaymentDto paymentDto);
+        IResult DeletePayment(PaymentDto paymentDto);
     }
 }

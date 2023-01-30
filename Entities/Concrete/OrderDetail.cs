@@ -10,14 +10,10 @@ namespace Entities.Concrete
     public class OrderDetail : IEntity
     {
         public int OrderDetailId { get; set; }
-        public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
-        public int OrderId { get; set; }
-        public Order Order { get; set; }
         public int OrderedId { get; set; }
         public Ordered Ordered { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
         public int Total { get; set; }
