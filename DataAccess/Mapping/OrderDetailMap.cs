@@ -16,7 +16,7 @@ namespace DataAccess.Mapping
             builder.HasData(new OrderDetail
             {
                 OrderDetailId = 1,
-                OrderedId= 1,
+                OrderId= 1,
                 ProductId = 1,
                 Price = 500,
                 Quantity = 1,

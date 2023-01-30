@@ -31,7 +31,6 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Ordered> Ordereds { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder) 
         {
