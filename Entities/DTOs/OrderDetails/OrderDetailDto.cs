@@ -11,7 +11,7 @@ namespace Entities.DTOs.OrderDetail
     public class OrderDetailDto:IDto
     {
         public int OrderDetailId { get; set; }
-        public int OrderedId { get; set; }
+        public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int Price { get; set; }
         public int Quantity { get; set; }
