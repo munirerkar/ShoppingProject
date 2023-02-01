@@ -21,14 +21,6 @@ namespace DataAccess.Mapping
                 ShipperId= 1,
                 OrderDate = DateTime.Now,
                 ShipDate = DateTime.Now,
-                FirstName = "Münir",
-                LastName = "Erkar",
-                Address = "Kadırgalar cd. İstanbul",
-                City = "İstanbul",
-                PostalCode = "34444",
-                Country = "Türkiye",
-                Email = "mano@gmail.com",
-                Phone = "05554879878",
                 Shipped = true,
             });
         }

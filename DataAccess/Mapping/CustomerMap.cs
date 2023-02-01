@@ -20,6 +20,7 @@ namespace DataAccess.Mapping
                 TcNo = "12345678912",
                 FirstName = "Münir",
                 LastName = "Erkar",
+                Phone = "5432344323",
                 Address1 = "Kadırgalar cd.",
                 Address2 = "Şişli İstanbul",
                 City = "İstanbul",

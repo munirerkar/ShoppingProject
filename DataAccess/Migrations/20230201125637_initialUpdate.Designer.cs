@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShoppingDbContext))]
-    partial class ShoppingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230201125637_initialUpdate")]
+    partial class initialUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -283,18 +286,23 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingCity")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingCountry")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingPostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CVV")
@@ -327,24 +335,24 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipCity")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipCountry")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipPostalCode")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TcNo")
@@ -379,7 +387,6 @@ namespace DataAccess.Migrations
                             CreditCard = "4337950475337442",
                             FirstName = "Münir",
                             LastName = "Erkar",
-                            Phone = "5432344323",
                             PostalCode = "34444",
                             ShipAddress = "Taksim",
                             ShipCity = "İstanbul",
@@ -450,9 +457,9 @@ namespace DataAccess.Migrations
                         {
                             OrderId = 1,
                             CustomerId = 1,
-                            OrderDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9518),
+                            OrderDate = new DateTime(2023, 2, 1, 15, 56, 37, 498, DateTimeKind.Local).AddTicks(5556),
                             PaymentId = 1,
-                            ShipDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9519),
+                            ShipDate = new DateTime(2023, 2, 1, 15, 56, 37, 498, DateTimeKind.Local).AddTicks(5557),
                             Shipped = true,
                             ShipperId = 1
                         });
@@ -496,7 +503,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             OrderDetailId = 1,
-                            BillDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9399),
+                            BillDate = new DateTime(2023, 2, 1, 15, 56, 37, 498, DateTimeKind.Local).AddTicks(5449),
                             OrderId = 1,
                             Price = 500,
                             ProductId = 1,

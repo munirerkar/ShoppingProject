@@ -17,16 +17,8 @@ namespace Entities.Concrete
         public Payment Payment { get; set; }
         public int ShipperId { get; set; }
         public Shipper Shipper { get; set; }
-        public DateTime? OrderDate { get; set; }
-        public DateTime? ShipDate { get; set; }
-        public bool? Shipped { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string Country { get; set; }
-        public string PostalCode { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime ShipDate { get; set; }
+        public bool Shipped { get; set; }
     }
 }
