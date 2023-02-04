@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs.Product;
+using Entities.DTOs.Products;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,7 +48,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateProduct(ProductAddDto productAddDto)
+        public IActionResult CreateProduct([FromForm]ProductAddDto productAddDto)
         {
             var result = _productService.CreateProduct(productAddDto);
             if (result.Success)

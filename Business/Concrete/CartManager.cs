@@ -6,7 +6,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs.Cart;
-using Entities.DTOs.Product;
+using Entities.DTOs.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;

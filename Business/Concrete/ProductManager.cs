@@ -6,10 +6,12 @@ using Business.ValidationRules.FluentValidation;
 using Core.Autofac.Caching;
 using Core.Autofac.Performance;
 using Core.Autofac.Validation;
+using Core.Utilities.Helper.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Entities.DTOs.Product;
+using Entities.DTOs.Products;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using System;
@@ -24,20 +26,28 @@ namespace Business.Concrete
     {
         IProductDal _productDal;
         IMapper _mapper;
-
-        public ProductManager(IProductDal productDal,IMapper mapper)
+        IImageDal _imageDal;
+        IFileHelper _fileHelper;
+        public ProductManager(IProductDal productDal,IMapper mapper,IImageDal imageDal, IFileHelper fileHelper)
         {
             _productDal = productDal;
             _mapper = mapper;
+            _fileHelper= fileHelper;
+            _imageDal= imageDal;
         }
+
         [ValidationAspect(typeof(ProductValidator))]
-        [CacheRemoveAspect("IProductService.Get")]
+        //[CacheRemoveAspect("IProductService.Get")]
         public IResult CreateProduct(ProductAddDto productAddDto)
         {
+            var imageUpload = _fileHelper.Upload(productAddDto.Photo, FilePath.ImagesPath);
+            Image image = new(imageUpload, DateTime.Now);
+            _imageDal.Add(image);
             var map = _mapper.Map<Product>(productAddDto);
-             _productDal.Add(map);
+            map.ImageId = image.ImageId;
+            _productDal.Add(map);
             return new SuccessResult(Messages.ProductAdded);
-        }
+        } 
 
         public IResult DeleteProduct(ProductDeleteDto productDeleteDto)
         {

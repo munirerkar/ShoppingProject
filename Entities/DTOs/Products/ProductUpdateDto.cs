@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities.DTOs.Product
+namespace Entities.DTOs.Products
 {
     public class ProductUpdateDto : IDto
     {

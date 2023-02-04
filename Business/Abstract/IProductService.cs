@@ -1,6 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
-using Entities.DTOs.Product;
+using Entities.DTOs.Products;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Entities.DTOs.Product;
+﻿using Entities.DTOs.Products;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

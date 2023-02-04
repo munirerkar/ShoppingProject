@@ -46,5 +46,7 @@ namespace Business.Constants
         public static string Added = "Eklendi";
         public static string Deleted = "Silindi";
         public static string Updated = "Güncellendi";
+
+        public static string ImageAdded = "Resim Eklendi";
     }
 }

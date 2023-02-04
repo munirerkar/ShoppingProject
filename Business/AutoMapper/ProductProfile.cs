@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Entities.Concrete;
-using Entities.DTOs.Product;
+using Entities.DTOs.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
