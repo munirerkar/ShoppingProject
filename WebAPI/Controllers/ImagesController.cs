@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs.Images;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -27,23 +28,22 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("delete")]
-        public IActionResult Delete(Image image)
+        public IActionResult Delete([FromForm]ImageDeleteDto imageDeleteDto)
         {
-            var deleteImage = _imageService.GetByImageId(image.ImageId).Data;
-            var result = _imageService.Delete(deleteImage);
+            var result = _imageService.Delete(imageDeleteDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update([FromForm] List<IFormFile> formFile, [FromForm] Image image)
+        public IActionResult Update([FromForm] ImageUpdateDto imageUpdateDto)
         {
-            var result = _imageService.Update(formFile, image);
+            var result = _imageService.Update(imageUpdateDto);
             if (result.Success)
             {
-                return Ok();
+                return Ok(result);
             }
             return BadRequest(result);
         }

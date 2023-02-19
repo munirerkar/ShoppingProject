@@ -15,10 +15,10 @@ namespace Business.AutoMapper
         {
             CreateMap<ProductAddDto, Product>().ReverseMap();
             CreateMap<ProductAddDto, ProductDto>().ReverseMap();
+            CreateMap<ProductDto, Product>().ReverseMap();
             CreateMap<ProductUpdateDto, Product>().ReverseMap();
             CreateMap<ProductUpdateDto, ProductDto>().ReverseMap();
             CreateMap<ProductDeleteDto, Product>().ReverseMap();
-            CreateMap<ProductDto, Product>().ReverseMap();
         }
     }
 }

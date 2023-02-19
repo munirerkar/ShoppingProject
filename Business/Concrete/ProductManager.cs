@@ -37,7 +37,6 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(ProductValidator))]
-        //[CacheRemoveAspect("IProductService.Get")]
         public IResult CreateProduct(ProductAddDto productAddDto)
         {
             var imageUpload = _fileHelper.Upload(productAddDto.Photo, FilePath.ImagesPath);

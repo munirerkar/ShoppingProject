@@ -20,6 +20,6 @@ namespace Entities.DTOs.Products
         public string BarcodeNumber { get; set; }
         public int UnitOfStock { get; set; }
         public decimal UnitPrice { get; set; }
-        public bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; }
     }
 }

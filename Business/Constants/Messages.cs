@@ -48,5 +48,8 @@ namespace Business.Constants
         public static string Updated = "Güncellendi";
 
         public static string ImageAdded = "Resim Eklendi";
+
+        public static string SupplierSafeDeleted = "Firma Yayından Kaldırıldı";
+        public static string SupplierUndoDeleted = "Firma Yayına Geri Alındı";
     }
 }

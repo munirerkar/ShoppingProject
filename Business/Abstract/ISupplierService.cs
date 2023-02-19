@@ -1,5 +1,7 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs.Images;
+using Entities.DTOs.Suppliers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,12 @@ namespace Business.Abstract
 {
     public interface ISupplierService
     {
-        IDataResult<List<Supplier>> GetAllSuppliersNonDeleted();
-        IDataResult<List<Supplier>> GetAllSuppliersDeleted();
-        IResult CreateSupplier(Supplier supplier);
-        IResult UpdateSupplier(Supplier supplier);
-        IResult DeleteSupplier(Supplier supplier);
+        IDataResult<List<SupplierDto>> GetAllSuppliersNonDeleted();
+        IDataResult<List<SupplierDto>> GetAllSuppliersDeleted();
+        IResult CreateSupplier(SupplierAddDto supplierAddDto);
+        IResult UpdateSupplier(SupplierUpdateDto supplierUpdateDto);
+        IResult DeleteSupplier(SupplierDeleteDto supplierDeleteDto);
+        IResult SafeDeleteProduct(int supplierId);
+        IResult UndoDeleteProduct(int supplierId);
     }
 }
