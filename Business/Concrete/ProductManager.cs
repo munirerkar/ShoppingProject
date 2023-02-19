@@ -12,6 +12,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs.Products;
+using Entities.DTOs.Suppliers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using System;
@@ -103,12 +104,27 @@ namespace Business.Concrete
              _productDal.Update(map);
             return new SuccessResult(Messages.ProductUndoDeleted);
         }
-        [CacheRemoveAspect("IProductService.Get")]
         public IResult UpdateProduct(ProductUpdateDto productUpdateDto)
         {
-            var map = _mapper.Map<Product>(productUpdateDto);
-             _productDal.Update(map);
-            return new SuccessResult(Messages.ProductUpdated);
+            if (productUpdateDto.Photo != null)
+            {
+                var product = _productDal.Get(x => x.ProductId == productUpdateDto.ProductId);
+                var imagee = _imageDal.Get(x => x.ImageId == product.ImageId);
+                _fileHelper.Delete(FilePath.ImagesPath + imagee.ImagePath);
+                var imageUpload = _fileHelper.Upload(productUpdateDto.Photo, FilePath.ImagesPath);
+                Image image = new(imageUpload, DateTime.Now);
+                _imageDal.Add(image);
+                var map = _mapper.Map<Product>(productUpdateDto);
+                map.ImageId = image.ImageId;
+                _productDal.Update(map);
+                return new SuccessResult(Messages.Updated);
+            }
+            else
+            {
+                var map = _mapper.Map<Product>(productUpdateDto);
+                _productDal.Update(map);
+                return new SuccessResult(Messages.ProductUpdated);
+            }
         }
     }
 }

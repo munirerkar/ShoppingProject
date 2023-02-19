@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Update")]
-        public IActionResult UpdateProduct(ProductUpdateDto productUpdateDto)
+        public IActionResult UpdateProduct([FromForm]ProductUpdateDto productUpdateDto)
         {
             var result = _productService.UpdateProduct(productUpdateDto);
             if (result.Success)
