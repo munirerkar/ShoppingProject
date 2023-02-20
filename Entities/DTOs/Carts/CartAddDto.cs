@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace Entities.DTOs.Cart
 {
-    public class CartDto : IDto
+    public class CartAddDto : IDto
     {
-        public int CartId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
         public int Total { get; set; }

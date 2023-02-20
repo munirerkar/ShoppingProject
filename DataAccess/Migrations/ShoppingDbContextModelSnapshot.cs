@@ -359,35 +359,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            Address1 = "Kadırgalar cd.",
-                            Address2 = "Şişli İstanbul",
-                            BillingAddress = "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye",
-                            BillingCity = "İstanbul",
-                            BillingCountry = "Türkiye",
-                            BillingPostalCode = "34444",
-                            BillingType = "Ev",
-                            CVV = "829",
-                            CardExpMo = 10,
-                            CardExpYr = 2027,
-                            City = "İstanbul",
-                            Country = "Türkiye",
-                            CreditCard = "4337950475337442",
-                            FirstName = "Münir",
-                            LastName = "Erkar",
-                            Phone = "5432344323",
-                            PostalCode = "34444",
-                            ShipAddress = "Taksim",
-                            ShipCity = "İstanbul",
-                            ShipCountry = "Türkiye",
-                            ShipPostalCode = "34454",
-                            TcNo = "12345678912",
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Image", b =>
@@ -444,18 +415,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderId = 1,
-                            CustomerId = 1,
-                            OrderDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9518),
-                            PaymentId = 1,
-                            ShipDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9519),
-                            Shipped = true,
-                            ShipperId = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
@@ -469,40 +428,19 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("BillDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("OrderDetailId");
 
+                    b.HasIndex("CartId");
+
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderDetailId = 1,
-                            BillDate = new DateTime(2023, 2, 1, 16, 7, 56, 699, DateTimeKind.Local).AddTicks(9399),
-                            OrderId = 1,
-                            Price = 500,
-                            ProductId = 1,
-                            Quantity = 1,
-                            Total = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>
@@ -803,21 +741,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
                 {
+                    b.HasOne("Entities.Concrete.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Concrete.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Product", b =>

@@ -26,16 +26,16 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult CreateCart(CartDto cartDto)
+        public IResult CreateCart(CartAddDto cartDto)
         {
             var map = _mapper.Map<Cart>(cartDto);
             _cartDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult DeleteCart(CartDto cartDto)
+        public IResult DeleteCart(CartDeleteDto cartDeleteDto)
         {
-            var map = _mapper.Map<Cart>(cartDto);
+            var map = _mapper.Map<Cart>(cartDeleteDto);
             _cartDal.Delete(map);
             return new SuccessResult(Messages.Deleted);
         }

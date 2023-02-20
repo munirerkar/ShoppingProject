@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs.Customer;
+using Entities.DTOs.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,9 @@ namespace Business.Concrete
             _mapper = mapper;
         }
 
-        public IResult CreateCustomer(CustomerDto customerDto)
+        public IResult CreateCustomer(CustomerAddDto customerAddDto)
         {
-            var map = _mapper.Map<Customer>(customerDto);
+            var map = _mapper.Map<Customer>(customerAddDto);
             _customerDal.Add(map);
             return new SuccessResult(Messages.Added);
         }

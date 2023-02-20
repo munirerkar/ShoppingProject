@@ -12,8 +12,8 @@ namespace Business.Abstract
     public interface ICartService
     {
         IDataResult<List<CartDto>> GetAllCarts();
-        IResult CreateCart(CartDto cartDto);
+        IResult CreateCart(CartAddDto cartDto);
         IResult UpdateCart(CartDto cartDto);
-        IResult DeleteCart(CartDto cartDto);
+        IResult DeleteCart(CartDeleteDto cartDeleteDto);
     }
 }

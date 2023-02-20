@@ -9,6 +9,7 @@ namespace Entities.DTOs.Images
 {
     public class ImageDto : IDto
     {
+        public int ImageId { get; set; }
         public string? ImagePath { get; set; }
         public DateTime Date { get; set; }
     }

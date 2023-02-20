@@ -28,9 +28,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCart(CartDto cartDto)
+        public IActionResult CreateCart(CartAddDto cartAddDto)
         {
-            var result = _cartService.CreateCart(cartDto);
+            var result = _cartService.CreateCart(cartAddDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -48,9 +48,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteCart(CartDto cartDto)
+        public IActionResult DeleteCart(CartDeleteDto cartDeleteDto)
         {
-            var result = _cartService.DeleteCart(cartDto);
+            var result = _cartService.DeleteCart(cartDeleteDto);
             if (result.Success)
             {
                 return Ok(result);

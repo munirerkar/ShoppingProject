@@ -14,6 +14,8 @@ namespace Business.AutoMapper
         public OrderDetailProfile()
         {
             CreateMap<OrderDetailDto, OrderDetail>().ReverseMap();
+            CreateMap<OrderDetailAddDto, OrderDetail>().ReverseMap();
+            CreateMap<OrderDetailDeleteDto, OrderDetail>().ReverseMap();
         }
     }
 }

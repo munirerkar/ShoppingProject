@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Concrete;
 using Entities.DTOs.Customer;
+using Entities.DTOs.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Business.AutoMapper
         public CustomerProfile()
         {
             CreateMap<CustomerDto, Customer>().ReverseMap();
+            CreateMap<CustomerAddDto, Customer>().ReverseMap();
         }
     }
 }

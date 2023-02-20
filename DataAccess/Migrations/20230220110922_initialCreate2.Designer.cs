@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShoppingDbContext))]
-    [Migration("20230130183039_initialCreate4")]
-    partial class initialCreate4
+    [Migration("20230220110922_initialCreate2")]
+    partial class initialCreate2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -286,23 +286,18 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingCity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingCountry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingPostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BillingType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CVV")
@@ -335,24 +330,24 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipAddress")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipCity")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipCountry")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShipPostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TcNo")
@@ -367,34 +362,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            Address1 = "Kadırgalar cd.",
-                            Address2 = "Şişli İstanbul",
-                            BillingAddress = "Kadırgalar Cad., No:1B, Şişli, İstanbul, Türkiye",
-                            BillingCity = "İstanbul",
-                            BillingCountry = "Türkiye",
-                            BillingPostalCode = "34444",
-                            BillingType = "Ev",
-                            CVV = "829",
-                            CardExpMo = 10,
-                            CardExpYr = 2027,
-                            City = "İstanbul",
-                            Country = "Türkiye",
-                            CreditCard = "4337950475337442",
-                            FirstName = "Münir",
-                            LastName = "Erkar",
-                            PostalCode = "34444",
-                            ShipAddress = "Taksim",
-                            ShipCity = "İstanbul",
-                            ShipCountry = "Türkiye",
-                            ShipPostalCode = "34454",
-                            TcNo = "12345678912",
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Image", b =>
@@ -424,51 +391,19 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("OrderDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PaymentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ShipDate")
+                    b.Property<DateTime>("ShipDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("Shipped")
+                    b.Property<bool>("Shipped")
                         .HasColumnType("bit");
 
                     b.Property<int>("ShipperId")
@@ -483,26 +418,6 @@ namespace DataAccess.Migrations
                     b.HasIndex("ShipperId");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderId = 1,
-                            Address = "Kadırgalar cd. İstanbul",
-                            City = "İstanbul",
-                            Country = "Türkiye",
-                            CustomerId = 1,
-                            Email = "mano@gmail.com",
-                            FirstName = "Münir",
-                            LastName = "Erkar",
-                            OrderDate = new DateTime(2023, 1, 30, 21, 30, 38, 738, DateTimeKind.Local).AddTicks(9309),
-                            PaymentId = 1,
-                            Phone = "05554879878",
-                            PostalCode = "34444",
-                            ShipDate = new DateTime(2023, 1, 30, 21, 30, 38, 738, DateTimeKind.Local).AddTicks(9313),
-                            Shipped = true,
-                            ShipperId = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
@@ -516,40 +431,19 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("BillDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
                         .HasColumnType("int");
 
                     b.HasKey("OrderDetailId");
 
+                    b.HasIndex("CartId");
+
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderDetailId = 1,
-                            BillDate = new DateTime(2023, 1, 30, 21, 30, 38, 738, DateTimeKind.Local).AddTicks(9185),
-                            OrderId = 1,
-                            Price = 500,
-                            ProductId = 1,
-                            Quantity = 1,
-                            Total = 1
-                        });
                 });
 
             modelBuilder.Entity("Entities.Concrete.Payment", b =>
@@ -850,21 +744,21 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.OrderDetail", b =>
                 {
+                    b.HasOne("Entities.Concrete.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entities.Concrete.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Concrete.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Cart");
 
                     b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Product", b =>

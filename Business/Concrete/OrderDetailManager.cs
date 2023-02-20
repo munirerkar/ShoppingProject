@@ -24,16 +24,17 @@ namespace Business.Concrete
         }
 
         
-        public IResult CreateOrderDetail(OrderDetailDto orderDetailDto)
+        public IResult CreateOrderDetail(OrderDetailAddDto orderDetailAddDto)
         {
-            var map = _mapper.Map<OrderDetail>(orderDetailDto);
+            var map = _mapper.Map<OrderDetail>(orderDetailAddDto);
+            map.BillDate = DateTime.Now;
             _orderDetailDal.Add(map);
             return new SuccessResult(Messages.Added);
         }
 
-        public IResult DeleteOrderDetail(OrderDetailDto orderDetailDto)
+        public IResult DeleteOrderDetail(OrderDetailDeleteDto orderDetailDeleteDto)
         {
-            var map = _mapper.Map<OrderDetail>(orderDetailDto);
+            var map = _mapper.Map<OrderDetail>(orderDetailDeleteDto);
             _orderDetailDal.Delete(map);
             return new SuccessResult(Messages.Deleted);
         }

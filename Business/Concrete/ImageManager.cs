@@ -47,14 +47,18 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Deleted);
         }
 
-        public IDataResult<List<Image>> GetAll()
+        public IDataResult<List<ImageDto>> GetAll()
         {
-            return new SuccessDataResult<List<Image>>(_imageDal.GetAll());
+            var image = _imageDal.GetAll();
+            var map = _mapper.Map<List<ImageDto>>(image);
+            return new SuccessDataResult<List<ImageDto>>(map);
         }
 
-        public IDataResult<Image> GetByImageId(int imageId)
+        public IDataResult<ImageDto> GetByImageId(int imageId)
         {
-            return new SuccessDataResult<Image>(_imageDal.Get(i => i.ImageId == imageId));
+            var image = _imageDal.Get(i => i.ImageId == imageId);
+            var map = _mapper.Map<ImageDto>(image);
+            return new SuccessDataResult<ImageDto>(map);
         }
 
         public IResult Update(ImageUpdateDto imageUpdateDto)

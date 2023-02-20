@@ -12,8 +12,8 @@ namespace Business.Abstract
     public interface IOrderService
     {
         IDataResult<List<OrderDto>> GetAllOrders();
-        IResult CreateOrder(OrderDto orderDto);
+        IResult CreateOrder(OrderAddDto orderAddDto);
         IResult UpdateOrder(OrderDto orderDto);
-        IResult DeleteOrder(OrderDto orderDto);
+        IResult DeleteOrder(OrderDeleteDto orderDeleteDto);
     }
 }

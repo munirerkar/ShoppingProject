@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs.Customer;
+using Entities.DTOs.Customers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +29,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateCustomer(CustomerDto customerDto)
+        public IActionResult CreateCustomer(CustomerAddDto customerAddDto)
         {
-            var result = _customerService.CreateCustomer(customerDto);
+            var result = _customerService.CreateCustomer(customerAddDto);
             if (result.Success)
             {
                 return Ok(result);

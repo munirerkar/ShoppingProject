@@ -30,9 +30,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Add")]
-        public IActionResult CreateProduct(OrderDetailDto orderDetailDto)
+        public IActionResult CreateProduct(OrderDetailAddDto orderDetailAddDto)
         {
-            var result = _orderDetailService.CreateOrderDetail(orderDetailDto);
+            var result = _orderDetailService.CreateOrderDetail(orderDetailAddDto);
             if (result.Success)
             {
                 return Ok(result);
@@ -50,9 +50,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpDelete("Delete")]
-        public IActionResult DeleteProduct(OrderDetailDto orderDetailDto)
+        public IActionResult DeleteProduct(OrderDetailDeleteDto orderDetailDeleteDto)
         {
-            var result = _orderDetailService.DeleteOrderDetail(orderDetailDto);
+            var result = _orderDetailService.DeleteOrderDetail(orderDetailDeleteDto);
             if (result.Success)
             {
                 return Ok(result);

@@ -13,7 +13,9 @@ namespace Business.AutoMapper
     {
         public CartProfile()
         {
+            CreateMap<CartAddDto, Cart>().ReverseMap();
             CreateMap<CartDto, Cart>().ReverseMap();
+            CreateMap<CartDeleteDto, Cart>().ReverseMap();
         }
     }
 }
